@@ -99,8 +99,12 @@ form div {
     background: #F8F8F8;
 }
 
+.caterogies_hover {
+    color: #333333 !important;
+    background: #F8F8F8; 
+}
+
 .input {
-    width: 100%; 
     display: block;
     margin-top: 20px;
     padding: 10px 15px;
@@ -116,8 +120,6 @@ form div {
 .text {
     font-weight: 400;
     font-size: 18px;
-    line-height: 26px;
-    margin-left: 15px;
     display: block;
 }
 
@@ -131,7 +133,7 @@ form div {
     border: 2px solid #ABABAB;
     border-radius: 10px;
     box-sizing: border-box;
-    margin-top: 2px;
+    margin-right: 15px;
     padding: 2px;
 }
 
@@ -165,36 +167,114 @@ button:hover {
     cursor: pointer;
 }
 
+.container_cards {
+    padding: 20px 0;
+}
+
 .card {
-    width: 100%;
-    padding: 40px;
+    width: 100% ;
     background: #ABABAB;
     border-radius: 10px;
     display: flex;
-    margin-top: 40px;
+    margin: 20px 0;
+    background: #F8F8F8;
 }
 
 .icon {
-    width: 120px;
+    width: 100px;
     box-sizing: border-box;
-    padding-top: 78px;
+    padding-top: 67px;
+    padding-left: 40px;
+    display: flex;
+}
+
+.gray {
+    display: block;
+    margin: auto;
+    color: #ABABAB
+}
+
+.red {
+    color: red;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
 }
 
 .info {
     display: flex;
     flex-direction: column;
+    width: calc(100% - 100px);
+    box-sizing: border-box;
+    padding: 40px 40px 40px 0;
 }
 
 .hard {
     text-align: end;
+    margin-bottom: 10px;
+    
+}
+
+.id {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 14px;
+    display: inline-block;
+    color: #ABABAB;
+    margin-bottom: 5px;
+}
+
+.id a, .blue {
+    color: #8EA7FF;
+}
+
+.blue {
+    margin-left: 5px;
+}
+
+.text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    margin-left: 0;
+    margin-bottom: 23px;
 }
 
 .text_info {
     display: flex;
+    
+}
+
+.date {
+    width: 100%;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    color: #ABABAB;
+    align-self: center;
+}
+
+.date span {
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 14px;
+    color: #ABABAB;
 }
 
 .celebrity {
-    align-self: flex-end;
+    padding: 6px 20px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 14px;
+    text-align: end;
 }
 
 .favourite {
@@ -207,7 +287,7 @@ button:hover {
     box-sizing: border-box;
 }
 
-.fa-solid {
+.whit {
    color: #F8F8F8;
 }
 
