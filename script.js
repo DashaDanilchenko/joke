@@ -29,14 +29,11 @@ const btnOff = document.createElement('div')
 btnOff.classList.add('off_radio')
 
 const btnJoke = document.querySelector('.btn_joke')
+
+btnRandom.addEventListener('click', activeRandom)
+btnCaterogies.addEventListener('click', activeCaterogies)
+btnWord.addEventListener('click', activeWord)
 btnJoke.addEventListener('click', createJoke)
-
-function createJoke() {
-    event.preventDefault()
-    createCard(joke)
-}
-
-let joke = {}
 
 function reset() {
     btnOff.remove()
@@ -49,13 +46,13 @@ function activeRandom() {
     reset()
     btnRandom.append(btnOff)
     btnRandom.classList.add('on')
-    jokeRandom()
 }
 
-async function jokeRandom() {
-    joke = await fetch('https://api.chucknorris.io/jokes/random')
-    .then(date => date.json())
-
+function activeCaterogies() {
+    reset()
+    btnCaterogies.append(btnOff)
+    btnCaterogies.classList.add('on')
+    caterogies.classList.remove('collapse')
 }
 
 const arrCaterogies = caterogies.querySelectorAll('div')
@@ -65,22 +62,9 @@ function seeCaterogie() {
     category = this.innerHTML
     arrCaterogies.forEach(c => c.classList.remove('caterogies_hover'))
     this.classList.add('caterogies_hover')
-    jokeCaterogies(category)
 }
 
 arrCaterogies.forEach(c => c.addEventListener('click', seeCaterogie))
-
-function activeCaterogies() {
-    reset()
-    btnCaterogies.append(btnOff)
-    btnCaterogies.classList.add('on')
-    caterogies.classList.remove('collapse')
-}
-
-async function jokeCaterogies(category) {
-    joke = await fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
-    .then(date => date.json())
-}
 
 function activeWord() {
     reset()
@@ -89,12 +73,23 @@ function activeWord() {
     inputInput.classList.remove('collapse')
 }
 
+let joke = {}
+
+async function jokeRandom() {
+    joke = await fetch('https://api.chucknorris.io/jokes/random')
+    .then(date => date.json())
+}
+
+async function jokeCaterogies(category) {
+    joke = await fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
+    .then(date => date.json())
+}
+
 async function seeWord() {
-    let word = this.value
+    let word = inputInput.value
     await jokeWord(word)
 }
 
-inputInput.addEventListener('mouseout', seeWord)
 async function jokeWord(query) {
     await fetch(`https://api.chucknorris.io/jokes/search?query=${query}`)
     .then(date => date.json())
@@ -106,17 +101,31 @@ async function jokeWord(query) {
     })
 }
 
-btnRandom.addEventListener('click', activeRandom)
-btnCaterogies.addEventListener('click', activeCaterogies)
-btnWord.addEventListener('click', activeWord)
+async function searchJoke() {
+    if (btnRandom.className.includes('on')) {
+       await jokeRandom()
+    }
+    if (btnCaterogies.className.includes('on')) {
+       await jokeCaterogies(category)
+    }
+    if (btnWord.className.includes('on')) {
+       await seeWord()
+    }
+}
+
+async function createJoke() {
+    event.preventDefault()
+    await searchJoke()
+    await createCard(joke)
+}
 
 const containerCards = document.querySelector('.container_cards')
 
-function createCard({created_at, id, url, value, categories}) {
+async function createCard({created_at, id, url, value, categories}) {
     const card = document.createElement('div')
     containerCards.append(card)
     let created = new Date(String(created_at))
-    let hours = parseInt((Date.now() - created) / (1000 * 60 * 60 * 24), 10)
+    let hours = parseInt((Date.now() - created) / (1000 * 60 * 60), 10)
     card.innerHTML = `<div class="card">
     <div class="icon">
         <div class="circle"><i class="fa-sharp fa-solid fa-comment gray"></i></div>

@@ -97,11 +97,13 @@ form div {
     cursor: pointer;
     color: #333333;
     background: #F8F8F8;
+    font-weight: 500;
 }
 
 .caterogies_hover {
     color: #333333 !important;
     background: #F8F8F8; 
+    font-weight: 500;
 }
 
 .input {
@@ -127,7 +129,7 @@ form div {
     display: flex;
 }
 
-.on_radio {
+.radio {
     width: 20px;
     height: 20px;
     border: 2px solid #ABABAB;
@@ -137,7 +139,7 @@ form div {
     padding: 2px;
 }
 
-.on_radio:hover {
+.radio:hover {
     cursor: pointer;
 }
 
@@ -279,6 +281,8 @@ button:hover {
 
 .favourite {
     display: flex;
+    position: fixed;
+    right: 0;
     flex-direction: column;
     width: 480px;
     padding: 40px;

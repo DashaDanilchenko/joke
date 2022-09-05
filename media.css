@@ -13,7 +13,6 @@
   
   @media (min-width:480px) and (max-width:1080px){
     .favourite {
-        position: absolute;
         margin-left: calc(100% - 480px);
         padding: 40px;
     }
@@ -28,7 +27,6 @@
   @media(max-width:480px){
     .favourite {
         width: 100%;
-        position: absolute;
         padding: 20px;
     }
     .none_average {
