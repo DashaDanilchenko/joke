@@ -28,3 +28,21 @@ function activeCaterogies() {
     btnCaterogies.classList.add('on')
     caterogies.classList.remove('collapse')
 }
+
+const arrCaterogies = caterogies.querySelectorAll('div')
+
+export let  category
+function seeCaterogie() {
+    category = this.innerHTML
+    arrCaterogies.forEach(c => c.classList.remove('caterogies_hover'))
+    this.classList.add('caterogies_hover')
+}
+
+arrCaterogies.forEach(c => c.addEventListener('click', seeCaterogie))
+
+function activeWord() {
+        reset()
+        btnWord.append(btnOff)
+        btnWord.classList.add('on')
+        inputInput.classList.remove('collapse')
+    }
