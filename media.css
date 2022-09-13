@@ -1,0 +1,39 @@
+@media (min-width:1080px){
+    .none {
+        display: none;
+    }
+    .position {
+        justify-content: start;
+    }
+    .joke_search {
+        background: white;
+        opacity: 1;
+    }
+  }
+  
+  @media (min-width:480px) and (max-width:1080px){
+    .favourite {
+        margin-left: calc(100% - 480px);
+        padding: 40px;
+    }
+    .none_average {
+        display: none;
+    }
+    .width {
+        width: 100%;
+        padding: 40px;
+    }
+  }
+  @media(max-width:480px){
+    .favourite {
+        width: 100%;
+        padding: 20px;
+    }
+    .none_average {
+        display: none;
+    }
+    .width {
+        width: 100%;
+        padding: 20px;
+    }
+  }
