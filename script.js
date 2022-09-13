@@ -132,16 +132,6 @@ const containerCardsLikesave = document.querySelector('.container_cards_save')
 let arrLikeJoke = []
 let storage = JSON.parse(localStorage.getItem('arrLikeJoke')) || []
 
-function arrAllLikeJoke() {
-    arrLikeJoke.forEach(jokel => {
-        storage.forEach(jokeSt => {
-            if(jokel !== jokeSt) {
-                arrLikeJoke.push(jokeSt)  
-            }
-        })
-    })
-}
-
 async function createCard() {
    
     containerCards.innerHTML = `${
