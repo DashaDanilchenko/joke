@@ -219,7 +219,7 @@ async function createCardLike() {containerCardsLike.innerHTML = `${
           <div class="circle"><i class="fa-sharp fa-solid fa-comment gray"></i></div>
       </div>
       <div class="info">    
-          <div class="hard ${i.id}" ><i class="fa-solid fa-heart del_like red" id="${i.id}"></i></div>
+          <div class="hard" ><i class="fa-solid fa-heart del_like red" id="${i.id}"></i></div>
           <div class="id">ID: <a href="${i.url}">${i.id}</a>
               <i class="fa-solid fa-arrow-up-right-from-square blue"></i>
           </div>
