@@ -1,3 +1,6 @@
+import { arrBtn, caterogies, category, btnOff, btnRandom, btnCaterogies, btnWord} from './active.js'
+import { joke,  arrJoke, jokeRandom, jokeCaterogies, seeWord, inputInput} from './api.js'
+
 const jokeSearch = document.querySelector('.search')
 const jokeFavourite = document.querySelector('.favourite')
 
@@ -16,90 +19,19 @@ function closeFavourite() {
     jokeFavourite.classList.add('none_average')
 }
 
-const btnRandom = document.querySelector('#random')
-const btnCaterogies = document.querySelector('#from_caterogies')
-const btnWord = document.querySelector('#word')
-
-const arrBtn = [btnRandom, btnCaterogies, btnWord]
-
-const caterogies = document.querySelector('.caterogies')
-const inputInput = document.querySelector('.input')
-
-const btnOff = document.createElement('div')
-btnOff.classList.add('off_radio')
-
 const btnJoke = document.querySelector('.btn_joke')
 
-btnRandom.addEventListener('click', activeRandom)
-btnCaterogies.addEventListener('click', activeCaterogies)
-btnWord.addEventListener('click', activeWord)
 btnJoke.addEventListener('click', createJoke)
 
 let arrAllJoke = []
 
-function reset() {
+export function reset() {
     btnOff.remove()
     arrBtn.forEach(btn => btn.classList.remove('on'))
     caterogies.classList.add('collapse')
     inputInput.classList.add('collapse')
     arrAllJoke = []
     createCard()
-}
-
-function activeRandom() {
-    reset()
-    btnRandom.append(btnOff)
-    btnRandom.classList.add('on')
-}
-
-function activeCaterogies() {
-    reset()
-    btnCaterogies.append(btnOff)
-    btnCaterogies.classList.add('on')
-    caterogies.classList.remove('collapse')
-}
-
-const arrCaterogies = caterogies.querySelectorAll('div')
-
-let  category
-function seeCaterogie() {
-    category = this.innerHTML
-    arrCaterogies.forEach(c => c.classList.remove('caterogies_hover'))
-    this.classList.add('caterogies_hover')
-}
-
-arrCaterogies.forEach(c => c.addEventListener('click', seeCaterogie))
-
-function activeWord() {
-    reset()
-    btnWord.append(btnOff)
-    btnWord.classList.add('on')
-    inputInput.classList.remove('collapse')
-}
-
-let joke = {}
-let arrJoke = []
-
-async function jokeRandom() {
-    joke = await fetch('https://api.chucknorris.io/jokes/random')
-    .then(date => date.json())
-}
-
-async function jokeCaterogies(category) {
-    joke = await fetch(`https://api.chucknorris.io/jokes/random?category=${category}`)
-    .then(date => date.json())
-}
-
-async function seeWord() {
-    let word = inputInput.value
-    await jokeWord(word)
-}
-
-async function jokeWord(query) {
-    await fetch(`https://api.chucknorris.io/jokes/search?query=${query}`)
-    .then(date => date.json())
-    .then(date => {arrJoke = date.result})
-    console.log(arrJoke)
 }
 
 async function searchJoke() {
@@ -128,12 +60,11 @@ async function createJoke() {
 
 const containerCards = document.querySelector('.container_cards')
 const containerCardsLike = document.querySelector('.container_cards_like')
-const containerCardsLikesave = document.querySelector('.container_cards_save')
+
 let arrLikeJoke = []
 let storage = JSON.parse(localStorage.getItem('arrLikeJoke')) || []
 
-async function createCard() {
-   
+export async function createCard() {
     containerCards.innerHTML = `${
         arrAllJoke.map((i) => {
             let created = new Date(String(i.created_at))
@@ -200,7 +131,7 @@ async function deleteArrLike() {
     await createCardLike()
 }
 
-async function createCardLike() {containerCardsLike.innerHTML = `${
+export async function createCardLike() {containerCardsLike.innerHTML = `${
     arrLikeJoke.map((i) => {
         let created = new Date(String(i.created_at))
         let hours = parseInt((Date.now() - created) / (1000 * 60 * 60), 10)
