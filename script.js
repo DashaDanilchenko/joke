@@ -1,5 +1,6 @@
 import { arrBtn, caterogies, category, btnOff, btnRandom, btnCaterogies, btnWord} from './active.js'
-import {  getJokeBySearch, getRandomJoke, getJokeByCategory} from './api.js'
+import {   getJoke} from './api.js'
+import { baseUrl } from './config';
 
 export const searchInput = document.querySelector('.input')
 const jokeSearch = document.querySelector('.search')
@@ -32,32 +33,28 @@ export function reset() {
     caterogies.classList.add('collapse')
     searchInput.classList.add('collapse')
     arrAllJoke = []
-    createCard()
+    renderJokes()
 }
 
 async function searchJoke() {
-    if (btnRandom.className.includes('on')) {
-       const joke = await getRandomJoke()
-       arrAllJoke.push(joke)
-    }
+    let url;
     if (btnCaterogies.className.includes('on')) {
         if (!category) {
             alert('Select a category!')
         }
-       const joke = await getJokeByCategory(category)
-       arrAllJoke.push(joke)
+        url = `${baseUrl}/random?category=${category}`
     }
     if (btnWord.className.includes('on')) {
-    //    await seeWord()
         const searchQuery = searchInput.value
-       arrAllJoke = await getJokeBySearch(searchQuery)
+        url = `${baseUrl}/search?query=${searchQuery}`
     }
+    arrAllJoke = await getJoke(url)
 }
 
 async function createJoke() {
     event.preventDefault()
     await searchJoke()
-    await createCard()
+    await renderJokes()
 }
 
 const containerCards = document.querySelector('.container_cards')
@@ -66,48 +63,61 @@ const containerCardsLike = document.querySelector('.container_cards_like')
 let arrLikeJoke = []
 let storage = JSON.parse(localStorage.getItem('arrLikeJoke')) || []
 
-export async function createCard() {
-    containerCards.innerHTML = `${
-        arrAllJoke.map((i) => {
-            let created = new Date(String(i.created_at))
-            let hours = parseInt((Date.now() - created) / (1000 * 60 * 60), 10)
-          return `<div class="card">
+function createJokeCard(joke) {
+    const { created_at, id, url, value, categories } = joke
+    let created = new Date(String(created_at))
+    let hours = parseInt((Date.now() - created) / (1000 * 60 * 60), 10)
+    const template = document.createElement('div')
+    template.innerHTML = `<div class="card">
           <div class="icon">
               <div class="circle"><i class="fa-sharp fa-solid fa-comment gray"></i></div>
           </div>
           <div class="info">    
-          <div class="hard icon_hard ${i.id}">
-          <i class="fa-regular fa-heart like red" id="${i.id}"></i>
-          <i class="fa-solid fa-heart no_like red delete" id="${i.id}"></i>
+          <div class="hard icon_hard ${id}">
+          <i class="fa-regular fa-heart like red" id="${id}"></i>
+          <i class="fa-solid fa-heart no_like red delete" id="${id}"></i>
           </div>
-              <div class="id">ID: <a href="${i.url}">${i.id}</a>
+              <div class="id">ID: <a href="${url}">${id}</a>
                   <i class="fa-solid fa-arrow-up-right-from-square blue"></i>
               </div>
-              <div class="text">${i.value}</div>
+              <div class="text">${value}</div>
               <div class="text_info">   
                   <div class="date">Last update: <span>${hours} hours ago</span></div>                        
-                  <div class="celebrity">${i.categories}</div>
+                  <div class="celebrity">${categories}</div>
               </div>
           </div> 
-      </div> `}).join('') 
-    }`
+      </div> `
+    const btnLike = template.querySelector('.like')
+    btnLike.addEventListener('click', () => {
+        arrLikeJoke.push(joke)
+        createCardLike()
+})
+    console.log(template.innerHTML)
+    console.log(btnLike)
+          return template.firstChild}
+
+export function renderJokes() {
+    const cards =  arrAllJoke.map(createJokeCard)
+    containerCards.innerHTML = ''
+    containerCards.append(...cards)
 
 const b = document.querySelector('.celebrity')
 if (b.innerHTML === '') {
     b.classList.add('collapse') 
     }
 
-    const arrBtnLike = document.querySelectorAll('.like')
-    arrBtnLike.forEach(i => i.addEventListener('click', pushArrLike)) 
+    // const arrBtnLike = document.querySelectorAll('.like')
+    // arrBtnLike.forEach(i => i.addEventListener('click', pushArrLike)) 
 
     const arrBtnNotLike = document.querySelectorAll('.no_like')
     arrBtnNotLike.forEach(i => i.addEventListener('click', deleteArrLike))
 }
 
+const favoritesJokes = [] // если меняется, то отрисовать новый и шутку тоже пометить лайком
 async function pushArrLike() {
     this.nextElementSibling.classList.remove('delete')
     this.classList.add('delete')
-    arrAllJoke.forEach(joke => {
+    arrAllJoke.forEach(joke => { // joke это шутка в массиве всех шуток
         for(let key in joke) {
             if(joke[key] === this.id) {
                 arrLikeJoke.push(joke)
@@ -133,7 +143,9 @@ async function deleteArrLike() {
     await createCardLike()
 }
 
-export async function createCardLike() {containerCardsLike.innerHTML = `${
+export async function createCardLike() {
+    console.log(arrLikeJoke)
+    containerCardsLike.innerHTML = `${
     arrLikeJoke.map((i) => {
         let created = new Date(String(i.created_at))
         let hours = parseInt((Date.now() - created) / (1000 * 60 * 60), 10)
