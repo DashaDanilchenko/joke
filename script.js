@@ -1,6 +1,7 @@
 import { arrBtn, caterogies, category, btnOff, btnRandom, btnCaterogies, btnWord} from './active.js'
-import { joke,  arrJoke, jokeRandom, jokeCaterogies, seeWord, inputInput} from './api.js'
+import {  getJokeBySearch, getRandomJoke, getJokeByCategory} from './api.js'
 
+export const searchInput = document.querySelector('.input')
 const jokeSearch = document.querySelector('.search')
 const jokeFavourite = document.querySelector('.favourite')
 
@@ -29,26 +30,27 @@ export function reset() {
     btnOff.remove()
     arrBtn.forEach(btn => btn.classList.remove('on'))
     caterogies.classList.add('collapse')
-    inputInput.classList.add('collapse')
+    searchInput.classList.add('collapse')
     arrAllJoke = []
     createCard()
 }
 
 async function searchJoke() {
     if (btnRandom.className.includes('on')) {
-       await jokeRandom()
+       const joke = await getRandomJoke()
        arrAllJoke.push(joke)
     }
     if (btnCaterogies.className.includes('on')) {
         if (!category) {
             alert('Select a category!')
         }
-       await jokeCaterogies(category)
+       const joke = await getJokeByCategory(category)
        arrAllJoke.push(joke)
     }
     if (btnWord.className.includes('on')) {
-       await seeWord()
-       arrAllJoke = arrJoke
+    //    await seeWord()
+        const searchQuery = searchInput.value
+       arrAllJoke = await getJokeBySearch(searchQuery)
     }
 }
 
