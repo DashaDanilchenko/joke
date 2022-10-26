@@ -1,5 +1,4 @@
-import {reset} from './script.js'
-import {inputInput} from './api.js'
+import {reset, searchInput} from './script.js'
 
 export const btnRandom = document.querySelector('#random')
 export const btnCaterogies = document.querySelector('#from_caterogies')
@@ -44,5 +43,5 @@ function activeWord() {
         reset()
         btnWord.append(btnOff)
         btnWord.classList.add('on')
-        inputInput.classList.remove('collapse')
+        searchInput.classList.remove('collapse')
     }
