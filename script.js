@@ -60,8 +60,23 @@ async function createJoke() {
 const containerCards = document.querySelector('.container_cards')
 const containerCardsLike = document.querySelector('.container_cards_like')
 
-let arrLikeJoke = []
-let storage = JSON.parse(localStorage.getItem('arrLikeJoke')) || []
+let favoritesJokes = []
+let storage = JSON.parse(localStorage.getItem('favoritesJokes')) || []
+
+function toggleFavorite(joke) {
+     if (isFavorite(joke.id)) {
+            favoritesJokes = favoritesJokes.filter(({id}) => id !== joke.id)
+        } else {
+            favoritesJokes.push(joke)
+        }
+}
+
+function toggleFavoriteAndRenderJokes(joke) {
+        toggleFavorite(joke)
+        saveFavoriteJokes()
+        renderFavoritesJokes()
+        renderJokes()
+}
 
 function createJokeCard(joke) {
     const { created_at, id, url, value, categories } = joke
@@ -74,8 +89,13 @@ function createJokeCard(joke) {
           </div>
           <div class="info">    
           <div class="hard icon_hard ${id}">
-          <i class="fa-regular fa-heart like red" id="${id}"></i>
-          <i class="fa-solid fa-heart no_like red delete" id="${id}"></i>
+          <button class="like-button">
+            ${
+            isFavorite(id)
+              ? '<i class="fa-solid fa-heart no_like red" id="${id}"></i>'
+              : '<i class="fa-regular fa-heart like red" id="${id}"></i>' 
+             }
+          </button>
           </div>
               <div class="id">ID: <a href="${url}">${id}</a>
                   <i class="fa-solid fa-arrow-up-right-from-square blue"></i>
@@ -87,14 +107,9 @@ function createJokeCard(joke) {
               </div>
           </div> 
       </div> `
-    const btnLike = template.querySelector('.like')
-    btnLike.addEventListener('click', () => {
-        arrLikeJoke.push(joke)
-        createCardLike()
-})
-    console.log(template.innerHTML)
-    console.log(btnLike)
-          return template.firstChild}
+    const btnLike = template.querySelector('.like-button')
+    btnLike.addEventListener('click', () => toggleFavoriteAndRenderJokes(joke))
+    return template.firstChild}
 
 export function renderJokes() {
     const cards =  arrAllJoke.map(createJokeCard)
@@ -109,44 +124,47 @@ if (b.innerHTML === '') {
     // const arrBtnLike = document.querySelectorAll('.like')
     // arrBtnLike.forEach(i => i.addEventListener('click', pushArrLike)) 
 
-    const arrBtnNotLike = document.querySelectorAll('.no_like')
-    arrBtnNotLike.forEach(i => i.addEventListener('click', deleteArrLike))
+    // const arrBtnNotLike = document.querySelectorAll('.no_like')
+    // arrBtnNotLike.forEach(i => i.addEventListener('click', deleteArrLike))
 }
 
-const favoritesJokes = [] // если меняется, то отрисовать новый и шутку тоже пометить лайком
+ // если меняется, то отрисовать новый и шутку тоже пометить лайком
 async function pushArrLike() {
     this.nextElementSibling.classList.remove('delete')
     this.classList.add('delete')
     arrAllJoke.forEach(joke => { // joke это шутка в массиве всех шуток
         for(let key in joke) {
             if(joke[key] === this.id) {
-                arrLikeJoke.push(joke)
+                favoritesJokes.push(joke)
             }
         }
     })
-    await saveMemory()
-    await createCardLike()
+     saveFavoriteJokes()
+    await renderFavoritesJokes()
 }
 
 async function deleteArrLike() {
     this.previousElementSibling.classList.remove('delete')
     this.classList.add('delete')
-    arrLikeJoke.filter(joke => {
+    favoritesJokes.filter(joke => {
         for(let key in joke) {
             if(joke[key] === this.id) {
-                const index = arrLikeJoke.indexOf(joke)
-                arrLikeJoke.splice(index, 1)
+                const index = favoritesJokes.indexOf(joke)
+                favoritesJokes.splice(index, 1)
             }
         }
     })
-    await saveMemory()
-    await createCardLike()
+     saveFavoriteJokes()
+    await renderFavoritesJokes()
 }
 
-export async function createCardLike() {
-    console.log(arrLikeJoke)
+function isFavorite(jokeId) {
+    return !!favoritesJokes.find(({id}) => id === jokeId)
+}
+export async function renderFavoritesJokes() {
+    console.log(favoritesJokes)
     containerCardsLike.innerHTML = `${
-    arrLikeJoke.map((i) => {
+    favoritesJokes.map((i) => {
         let created = new Date(String(i.created_at))
         let hours = parseInt((Date.now() - created) / (1000 * 60 * 60), 10)
       return `<div class="card">
@@ -186,34 +204,34 @@ async function deleteArrLikeFavor() {
         }
     })
     
-    arrLikeJoke.filter(joke => {
+    favoritesJokes.filter(joke => {
         for(let key in joke) {
             if(joke[key] === this.id) {
-                const index = arrLikeJoke.indexOf(joke)
-                arrLikeJoke.splice(index, 1)
+                const index = favoritesJokes.indexOf(joke)
+                favoritesJokes.splice(index, 1)
             }
         }
     })
-    await saveMemory()
-    await createCardLike()
+     saveFavoriteJokes()
+    await renderFavoritesJokes()
 }
 
-async function saveMemory() {
-    localStorage.setItem('arrLikeJoke', JSON.stringify(arrLikeJoke))
+function saveFavoriteJokes() {
+    localStorage.setItem('favoritesJokes', JSON.stringify(favoritesJokes))
 }
 
 document.addEventListener("DOMContentLoaded",async function(){
     if (storage) {
-        arrLikeJoke = storage 
-        await  createCardLike()
+        favoritesJokes = storage 
+        await  renderFavoritesJokes()
     }
    })
 
 const btnDelete = document.querySelector('.remove')
 
 async function clearContainer () {
-    arrLikeJoke = []
+    favoritesJokes = []
     storage = []
-    await  createCardLike()
+    await  renderFavoritesJokes()
 }
    btnDelete.addEventListener('click', clearContainer)
