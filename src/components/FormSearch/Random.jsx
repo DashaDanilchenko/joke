@@ -1,8 +1,9 @@
 const Random = ({check}) => {
   return (
     <div>
-        <input type="radio" id="random" name="random" onClick={() => check("random")}/>
-        <label for="random">Random</label>
+        <label >
+          <input type="radio" id="random" name="random" onClick={() => check("random")}/>
+        Random</label>
     </div>
   )
 }

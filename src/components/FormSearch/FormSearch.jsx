@@ -2,8 +2,14 @@ import FromCategories from "./FromCategories"
 import Random from "./Random"
 import Search from "./Search"
 
+
+
 const FormSearch = () => {
 
+  function addNone() {
+    document.querySelector("#btn_container").classList.add("none")
+    document.querySelector("#input_container").classList.add("none")
+  }
 
   function uncheck() {
     document.getElementById("random").checked = false;
@@ -13,8 +19,17 @@ const FormSearch = () => {
 
   function check(id) {
     uncheck()
+    addNone()
     document.getElementById(`${id}`).checked = true;
-    console.log(`${id}`)
+    if (id === "random") {
+      console.log("random")
+    }
+    if (id === "from_categories") {
+      document.querySelector("#btn_container").classList.remove("none")
+    } 
+    if (id === "search") {
+      document.querySelector("#input_container").classList.remove("none")
+    } 
   }
   
   
