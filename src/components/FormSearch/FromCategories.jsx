@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import ButtonCategories from "./ButtonCategories"
 
-const FromCategories = ({check}) => {
+const FromCategories = ({check, look}) => {
 
   const [categories, setCategories] = useState ([])
   const [error, setError] = useState ('')
@@ -25,7 +25,7 @@ const FromCategories = ({check}) => {
           <input type="radio" id="from_categories" name="from_categories" onClick={() => check("from_categories")}/>
         from Categories</label>
         <div className="none" id="btn_container">
-          {(isLoading && <h1>Loading...</h1>) ||  categories.map((item, index) => <ButtonCategories key={index} item={item}/>)}
+          {(isLoading && <h1>Loading...</h1>) ||  categories.map((item, index) => <ButtonCategories key={index} item={item} look={look}/>)}
         </div>
     </div>
   )

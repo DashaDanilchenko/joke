@@ -1,6 +1,6 @@
-const ButtonCategories = ({item}) => {
+const ButtonCategories = ({item, look}) => {
   return (
-    <button type="button" onClick={() => console.log(item)}>{item}</button>
+    <button type="button" onClick={() => look(item)}>{item}</button>
   )
 }
 

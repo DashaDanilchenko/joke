@@ -9,8 +9,9 @@ const FormSearch = () => {
 
   const baseUrl = 'https://api.chucknorris.io/jokes/'
 
-  const [arrJoke, setArrJoke] = useState ([])
-  const [joke, setJoke] = useState ({})
+  const [joke, setJoke] = useState ([])
+  const [categoriesInput, setCategoriesInput] = useState ('')
+
 
   function addNone() {
     document.querySelector("#btn_container").classList.add("none")
@@ -28,7 +29,7 @@ const FormSearch = () => {
     addNone()
     document.getElementById(`${id}`).checked = true;
     if (id === "random") {
-      getJoke(`${baseUrl}/random`)
+      getJoke()
     }
     if (id === "from_categories") {
       document.querySelector("#btn_container").classList.remove("none")
@@ -36,33 +37,30 @@ const FormSearch = () => {
     } 
     if (id === "search") {
       document.querySelector("#input_container").classList.remove("none")
-      getArrJoke(`${baseUrl}/search?query=stop`)
+      getJoke(`${baseUrl}/search?query=stop`)
     } 
   }
 
-  function getJoke(url) {
+ function getJoke(url = `${baseUrl}/random`) {
     fetch(url)
-        .then(date => date.json())    
-        .then(joke => setJoke(joke))
-  }
+    .then(date => date.json())    
+    .then(joke => joke.result ? joke.result : setJoke(joke))
+}
 
   console.log(joke)
 
-
-  function getArrJoke(url) {
-    fetch(url)
-        .then(date => date.json())    
-        .then(joke => setArrJoke(joke))
+  function look (str) {
+    setCategoriesInput(str)
   }
 
-  console.log(arrJoke)
+  console.log(categoriesInput)
   
   
   return (
     <form>
        <Random check={check} />
-       <FromCategories check={check} />
-       <Search check={check} />
+       <FromCategories check={check} look={look}/>
+       <Search check={check} look={look}/>
        <button type="button">Get a joke</button>
     </form>
   )
