@@ -1,6 +1,11 @@
-const Joke = () => {
+import CartJoke from "./CartJoke"
+
+
+const Joke = ({joke}) => {
   return (
-    <div>Joke</div>
+    <div>
+      {joke.map((item) => <CartJoke key={item.id} {...item}/>)}
+    </div>
   )
 }
 

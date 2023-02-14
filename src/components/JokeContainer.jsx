@@ -21,7 +21,7 @@ const JokeContainer = () => {
   function getJoke(url = `${baseUrl}/random`) {
     fetch(url)
     .then(date => date.json())    
-    .then(joke => setJoke(joke.result) ? setJoke(joke.result) : [setJoke(joke)])
+    .then(joke => joke.result ? setJoke(joke.result) : setJoke([joke]))
 }
 
   console.log(joke)
@@ -51,7 +51,7 @@ const JokeContainer = () => {
        <h2>Hey !</h2>
        <p>Let`s try find a joke for you:</p>
        <FormSearch look={look} searchJoke={searchJoke}/>
-       <Joke />
+       <Joke joke={joke}/>
     </div>
   )
 }
