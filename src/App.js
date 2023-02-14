@@ -8,15 +8,16 @@ function App() {
   const [jokeFavorite, setJokeFavorite] = useState ([])
 
 function addJoke (arr, id) {
-  const jokeItem = arr.fined(item => item.id === id)
+
+  const jokeItem = arr.find(item => item.id === id)
   setJokeFavorite([...jokeFavorite, jokeItem])
 }
 
-console.log(jokeFavorite);
+console.log(jokeFavorite)
 
   return (
     <div className="App">
-      <JokeContainer addJoke={addJoke}/>
+      <JokeContainer addJoke={addJoke} jokeFavorite={jokeFavorite}/>
       <FavoriteJokeContainer />
     </div>
   );

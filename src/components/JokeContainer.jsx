@@ -3,7 +3,7 @@ import FormSearch from './FormSearch/FormSearch'
 import styles from '../styles/JokeContainer.module.css'
 import Joke from './Joke'
 
-const JokeContainer = ({addJoke}) => {
+const JokeContainer = ({addJoke, jokeFavorite}) => {
 
   const baseUrl = 'https://api.chucknorris.io/jokes/'
 
@@ -51,7 +51,7 @@ const JokeContainer = ({addJoke}) => {
        <h2>Hey !</h2>
        <p>Let`s try find a joke for you:</p>
        <FormSearch look={look} searchJoke={searchJoke}/>
-       <Joke joke={joke} addJoke ={addJoke}/>
+       <Joke joke={joke} addJoke ={addJoke} jokeFavorite={jokeFavorite}/>
     </div>
   )
 }
