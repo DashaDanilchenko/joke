@@ -3,7 +3,7 @@ import FormSearch from './FormSearch/FormSearch'
 import styles from '../styles/JokeContainer.module.css'
 import Joke from './Joke'
 
-const JokeContainer = ({addJoke, jokeFavorite}) => {
+const JokeContainer = ({addJoke, jokeFavorite, deleteJoke}) => {
 
   const baseUrl = 'https://api.chucknorris.io/jokes/'
 
@@ -15,8 +15,6 @@ const JokeContainer = ({addJoke, jokeFavorite}) => {
   }
 
   console.log(categoriesInput)
- 
-
 
   function getJoke(url = `${baseUrl}/random`) {
     fetch(url)
@@ -29,10 +27,11 @@ const JokeContainer = ({addJoke, jokeFavorite}) => {
   
   function searchJoke() {
 
-    if (!categoriesInput) {
-      alert('Select a category!')
-    }
-
+    if (document.querySelector('#random').checked !== true) {
+      if (!categoriesInput) {
+        console.log('Select a category!')
+      }
+  }
     let url;
 
     if (document.querySelector('#from_categories').checked === true) {
@@ -51,7 +50,7 @@ const JokeContainer = ({addJoke, jokeFavorite}) => {
        <h2>Hey !</h2>
        <p>Let`s try find a joke for you:</p>
        <FormSearch look={look} searchJoke={searchJoke}/>
-       <Joke joke={joke} addJoke ={addJoke} jokeFavorite={jokeFavorite}/>
+       <Joke joke = {joke} addJoke = {addJoke} jokeFavorite={jokeFavorite} deleteJoke={deleteJoke}/>
     </div>
   )
 }

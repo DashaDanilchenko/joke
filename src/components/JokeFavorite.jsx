@@ -1,6 +1,10 @@
-const JokeFavorite = () => {
+import CartFavoriteJoke from "./CartFavoriteJoke"
+
+const JokeFavorite = ({jokeFavorite, deleteJoke}) => {
   return (
-    <div>JokeFavorite</div>
+    <div>
+       {jokeFavorite.map((item) => <CartFavoriteJoke key={item.id} item = {item} jokeFavorite={jokeFavorite}  deleteJoke = {deleteJoke}/>)}
+    </div>
   )
 }
 

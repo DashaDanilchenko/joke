@@ -13,12 +13,16 @@ function addJoke (arr, id) {
   setJokeFavorite([...jokeFavorite, jokeItem])
 }
 
+function deleteJoke (arr, id) {
+  setJokeFavorite(arr.filter((todo) => todo.id !== id))
+}
+
 console.log(jokeFavorite)
 
   return (
     <div className="App">
-      <JokeContainer addJoke={addJoke} jokeFavorite={jokeFavorite}/>
-      <FavoriteJokeContainer />
+      <JokeContainer addJoke={addJoke} jokeFavorite={jokeFavorite} deleteJoke={deleteJoke}/>
+      <FavoriteJokeContainer jokeFavorite={jokeFavorite} deleteJoke={deleteJoke}/>
     </div>
   );
 }

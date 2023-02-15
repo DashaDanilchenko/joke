@@ -2,11 +2,11 @@
 import JokeFavorite from "./JokeFavorite"
 import LabelFavorite from "./LabelFavorite"
 
-const FavoriteJokeContainer = () => {
+const FavoriteJokeContainer = ({jokeFavorite, deleteJoke}) => {
   return (
     <div>
       <LabelFavorite />
-      <JokeFavorite />
+      <JokeFavorite jokeFavorite = {jokeFavorite} deleteJoke ={ deleteJoke}/>
     </div>
   )
 }

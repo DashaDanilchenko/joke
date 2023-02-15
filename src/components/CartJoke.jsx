@@ -1,7 +1,7 @@
 import { BiMessageAltDetail, BiHeart, BiChevronRight } from "react-icons/bi"
 import styles from '../styles/CartJoke.module.css'
 
-const CartJoke = ({item, addJoke, jokeFavorite, joke}) => {
+const CartJoke = ({item, addJoke, jokeFavorite, joke, deleteJoke}) => {
 
     const { created_at, id, url, value, categories } = item
     let created = new Date(String(created_at))
@@ -21,8 +21,8 @@ const CartJoke = ({item, addJoke, jokeFavorite, joke}) => {
           <div className={styles.hard}>
           <button type="button" className={styles.like_button}>
            {isFavorite (id)
-                ? <BiHeart className={styles.red} id={id}/> 
-                : <BiHeart id={id} onClick = {() => addJoke(joke, id)}/>  
+                ? <BiHeart className={styles.red} onClick = {() => deleteJoke(jokeFavorite, id)}/> 
+                : <BiHeart onClick = {() => addJoke(joke, id)}/>  
             }
           </button>
           </div>
@@ -32,7 +32,7 @@ const CartJoke = ({item, addJoke, jokeFavorite, joke}) => {
               <div className={styles.text}>{value}</div>
                   <div className={styles.text_info}>   
                        <div className={styles.date}>Last update: <span>{hours} hours ago</span></div>                        
-                       <div className={styles.celebrity}>{categories}</div>
+                       {!!`${categories}` && <div className={styles.celebrity}>{categories}</div>}
                    </div>
                </div> 
            </div> 
