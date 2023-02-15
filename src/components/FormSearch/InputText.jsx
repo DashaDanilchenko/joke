@@ -1,9 +1,9 @@
 
-const InputText = ({look}) => {
+const InputText = ({input, setInput}) => {
 
   return (
     <div className="none" id="input_container">
-         <input type="text"  onChange={(e) => look(e.target.value)}/>
+         <input type="text" value={input} onChange={(e) => setInput(e.target.value)}/>
     </div>
   )
 }

@@ -4,7 +4,7 @@ import Search from "./Search"
 
 
 
-const FormSearch = ({look, searchJoke}) => {
+const FormSearch = ({setCategories, setInput, searchJoke, input}) => {
 
   function addNone() {
     document.querySelector("#btn_container").classList.add("none")
@@ -34,8 +34,8 @@ const FormSearch = ({look, searchJoke}) => {
   return (
     <form>
        <Random check={check} />
-       <FromCategories check={check} look={look}/>
-       <Search check={check} look={look}/>
+       <FromCategories check={check} setCategories={setCategories}/>
+       <Search check={check} setInput={setInput} input={input}/>
        <button type="button" onClick={() => searchJoke()}>Get a joke</button>
     </form>
   )

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 import ButtonCategories from "./ButtonCategories"
 
-const FromCategories = ({check, look}) => {
+const FromCategories = ({check, setCategories}) => {
 
-  const [categories, setCategories] = useState ([])
+  const [categoriesArr, setCategoriesArr] = useState ([])
   const [error, setError] = useState ('')
   const [isLoading, setIsLoading] = useState (true)
 
   useEffect  (() => {
     fetch('https://api.chucknorris.io/jokes/categories')
     .then(data => data.json())
-    .then(data => setCategories(data))
+    .then(data => setCategoriesArr(data))
     .catch(error => setError(error.massage))
     .finally(() => setIsLoading(false))
   }, [])
@@ -25,7 +25,7 @@ const FromCategories = ({check, look}) => {
           <input type="radio" id="from_categories" name="from_categories" onClick={() => check("from_categories")}/>
         from Categories</label>
         <div className="none" id="btn_container">
-          {(isLoading && <h1>Loading...</h1>) ||  categories.map((item, index) => <ButtonCategories key={index} item={item} look={look}/>)}
+          {(isLoading && <h1>Loading...</h1>) ||  categoriesArr.map((item, index) => <ButtonCategories key={index} item={item} setCategories={setCategories}/>)}
         </div>
     </div>
   )

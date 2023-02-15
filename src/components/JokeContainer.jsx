@@ -8,13 +8,11 @@ const JokeContainer = ({addJoke, jokeFavorite, deleteJoke}) => {
   const baseUrl = 'https://api.chucknorris.io/jokes/'
 
   const [joke, setJoke] = useState ([])
-  const [categoriesInput, setCategoriesInput] = useState ('')
+  const [categories, setCategories] = useState ('')
+  const [input, setInput] = useState ('')
 
-  function look (str) {
-    setCategoriesInput(str)
-  }
-
-  console.log(categoriesInput)
+  console.log(categories)
+  console.log(input)
 
   function getJoke(url = `${baseUrl}/random`) {
     fetch(url)
@@ -26,21 +24,23 @@ const JokeContainer = ({addJoke, jokeFavorite, deleteJoke}) => {
 
   
   function searchJoke() {
-
-    if (document.querySelector('#random').checked !== true) {
-      if (!categoriesInput) {
-        console.log('Select a category!')
-      }
-  }
-    let url;
+      let url;
 
     if (document.querySelector('#from_categories').checked === true) {
-        url = `${baseUrl}/random?category=${categoriesInput}`
+      if (!categories) {
+        return alert('Select a category!')
+      }
+        url = `${baseUrl}/random?category=${categories}`
     }
     if (document.querySelector('#search').checked === true) {
-        url = `${baseUrl}/search?query=${categoriesInput}`
+      if (!input) {
+        return alert('Select a word!')
+      }
+        url = `${baseUrl}/search?query=${input}`
     }
     getJoke(url)
+    setCategories('')
+    setInput('')
   }
 
 
@@ -49,7 +49,7 @@ const JokeContainer = ({addJoke, jokeFavorite, deleteJoke}) => {
        <p>MSI 2020</p> 
        <h2>Hey !</h2>
        <p>Let`s try find a joke for you:</p>
-       <FormSearch look={look} searchJoke={searchJoke}/>
+       <FormSearch setInput={setInput} setCategories={setCategories} searchJoke={searchJoke} input={input}/>
        <Joke joke = {joke} addJoke = {addJoke} jokeFavorite={jokeFavorite} deleteJoke={deleteJoke}/>
     </div>
   )
