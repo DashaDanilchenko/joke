@@ -1,0 +1,12 @@
+
+.favorite {
+    display: flex;
+    position: fixed;
+    right: 0;
+    flex-direction: column;
+    width: 480px;
+    padding: 40px;
+    background: #F8F8F8;
+    height: 100vh;
+    box-sizing: border-box;
+}

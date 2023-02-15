@@ -1,19 +1,6 @@
-/* .container {
+.container {
     padding: 40px 140px;
     width: calc(100% - 480px);
     height: 100vh;
     box-sizing: border-box;
-} */
-
-/* 
-.favourite {
-    display: flex;
-    position: fixed;
-    right: 0;
-    flex-direction: column;
-    width: 480px;
-    padding: 40px;
-    background: #F8F8F8;
-    height: 100vh;
-    box-sizing: border-box;
-} */
+}

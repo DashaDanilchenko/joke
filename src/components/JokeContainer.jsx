@@ -11,18 +11,12 @@ const JokeContainer = ({addJoke, jokeFavorite, deleteJoke}) => {
   const [categories, setCategories] = useState ('')
   const [input, setInput] = useState ('')
 
-  console.log(categories)
-  console.log(input)
-
   function getJoke(url = `${baseUrl}/random`) {
     fetch(url)
     .then(date => date.json())    
     .then(joke => joke.result ? setJoke(joke.result) : setJoke([joke]))
 }
-
-  console.log(joke)
-
-  
+ 
   function searchJoke() {
       let url;
 

@@ -25,7 +25,7 @@ const CartJoke = ({item, addJoke, jokeFavorite, joke, deleteJoke}) => {
                 : <BiHeart onClick = {() => addJoke(joke, id)}/>  
             }
           </button>
-          </div>
+          </div >
               <div className={styles.id}>ID: <a href={url}>{id}</a>
                   <BiChevronRight/>
               </div>

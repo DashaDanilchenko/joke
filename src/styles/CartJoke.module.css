@@ -17,12 +17,6 @@
     display: flex;
 }
 
-.gray {
-    display: block;
-    margin: auto;
-    color: #ABABAB
-}
-
 .red {
     color: red;
 }
@@ -33,6 +27,8 @@
     background: white;
     border-radius: 50%;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .info {
@@ -45,8 +41,12 @@
 
 .hard {
     text-align: end;
-    margin-bottom: 10px;
-    
+    margin-bottom: 10px; 
+}
+
+.like_button {
+    border: none;
+    background: none;
 }
 
 .id {
@@ -58,12 +58,8 @@
     margin-bottom: 5px;
 }
 
-.id a, .blue {
+.id a {
     color: #8EA7FF;
-}
-
-.blue {
-    margin-left: 5px;
 }
 
 .text {
