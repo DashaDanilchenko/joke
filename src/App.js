@@ -6,7 +6,7 @@ import './App.css';
 function App() {
 
   const [jokeFavorite, setJokeFavorite] = useState ([])
-  const [favoriteContainer, setFavoriteContainer] = useState (false)
+  const [favoriteContainer, setFavoriteContainer] = useState(false)
 
 function addJoke (arr, id) {
 
@@ -22,7 +22,8 @@ console.log(jokeFavorite)
 
   return (
     <div className="App">
-      <JokeContainer addJoke={addJoke} jokeFavorite={jokeFavorite} deleteJoke={deleteJoke} setFavoriteContainer={setFavoriteContainer}/>
+      <JokeContainer addJoke={addJoke} jokeFavorite={jokeFavorite} deleteJoke={deleteJoke} setFavoriteContainer={setFavoriteContainer} favoriteContainer={favoriteContainer}/>
+      <div className={favoriteContainer? 'block': ''}></div>
       <FavoriteJokeContainer jokeFavorite={jokeFavorite} deleteJoke={deleteJoke} setFavoriteContainer={setFavoriteContainer} favoriteContainer={favoriteContainer}/>
     </div>
   );

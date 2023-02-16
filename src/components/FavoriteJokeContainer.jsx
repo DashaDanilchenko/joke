@@ -6,9 +6,11 @@ import LabelFavorite from './LabelFavorite'
 const FavoriteJokeContainer = ({jokeFavorite, deleteJoke, setFavoriteContainer, favoriteContainer}) => {
 
   return (
-    <div className={`${styles.favorite} ${favoriteContainer? '': styles.none}`}>
+    <div className={`${styles.favorite} ${favoriteContainer? styles.block_screen: styles.none}`}>
       <p className={styles.favorite_text}>Favorite</p>
-      <LabelFavorite setFavoriteContainer={setFavoriteContainer}/>
+      <div className={styles.label_container}>
+        <LabelFavorite setFavoriteContainer={setFavoriteContainer} favoriteContainer={favoriteContainer}/>
+      </div>
       <JokeFavorite jokeFavorite = {jokeFavorite} deleteJoke ={ deleteJoke}/>
     </div>
   )

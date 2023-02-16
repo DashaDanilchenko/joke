@@ -5,3 +5,38 @@
 .none {
   display: none;
 }
+
+p {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+h2 {
+  font-weight: 500;
+    font-size: 24px;
+}
+
+@media (min-width:480px) and (max-width:1080px){
+
+  .block {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: #333333;
+    opacity: 0.5;
+    top: 0;
+  }
+}
+
+@media(max-width:480px){
+ 
+  .block {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: #333333;
+    opacity: 0.5;
+    top: 0;
+  }
+
+}
