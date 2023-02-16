@@ -2,8 +2,9 @@ import { useState } from "react"
 import FormSearch from './FormSearch/FormSearch'
 import styles from '../styles/JokeContainer.module.css'
 import Joke from './Joke'
+import LabelFavorite from "./LabelFavorite"
 
-const JokeContainer = ({addJoke, jokeFavorite, deleteJoke}) => {
+const JokeContainer = ({addJoke, jokeFavorite, deleteJoke, setFavoriteContainer}) => {
 
   const baseUrl = 'https://api.chucknorris.io/jokes/'
 
@@ -40,7 +41,10 @@ const JokeContainer = ({addJoke, jokeFavorite, deleteJoke}) => {
 
   return (
     <div className={styles.container}>
-       <p>MSI 2020</p> 
+      <div className={styles.container_label}>
+        <p>MSI 2020</p> 
+        <LabelFavorite setFavoriteContainer={setFavoriteContainer}/>
+      </div>
        <h2>Hey !</h2>
        <p>Let`s try find a joke for you:</p>
        <FormSearch setInput={setInput} setCategories={setCategories} searchJoke={searchJoke} input={input}/>

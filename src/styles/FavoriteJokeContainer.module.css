@@ -10,3 +10,45 @@
     height: 100vh;
     box-sizing: border-box;
 }
+
+.favorite_text {
+    font-weight: 500;
+    font-size: 20px;
+    color: #ABABAB;
+}
+
+.none {
+    display: flex;
+}
+
+
+@media (min-width:480px) and (max-width:1080px){
+
+    .favorite {
+        margin-left: calc(100% - 480px);
+        padding: 40px;
+    }
+
+    .favorite_text {
+        display: none;
+    }
+
+    .none {
+        display: none;
+    }
+  }
+  @media(max-width:480px){
+   
+    .favorite {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .favorite_text {
+        display: none;
+    }
+
+    .none {
+        display: none;
+    }
+  }

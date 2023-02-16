@@ -4,3 +4,24 @@
     height: 100vh;
     box-sizing: border-box;
 }
+
+
+.container_label {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (min-width:480px) and (max-width:1080px){
+
+    .container {
+        width: 100%;
+        padding: 40px;
+    }
+  }
+  @media(max-width:480px){
+   
+    .container {
+        width: 100%;
+        padding: 20px;
+    }
+  }
