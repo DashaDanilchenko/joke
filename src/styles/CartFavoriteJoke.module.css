@@ -1,6 +1,6 @@
 
 .card {
-    width: 100% ;
+    width: calc(100% - 40px);
     background: #ABABAB;
     border-radius: 10px;
     display: flex;
@@ -17,9 +17,12 @@
 .info {
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 80px;
+    height: auto;
     box-sizing: border-box;
-}
+    justify-content: space-between;
+    margin-left: 20px;
+} 
 
 .like_button {
     border: none;

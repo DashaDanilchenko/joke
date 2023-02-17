@@ -20,10 +20,14 @@ const FromCategories = ({check, setCategories}) => {
 }
 
   return (
-    <div>
-        <label>
-          <input type="radio" id="from_categories" name="from_categories" onClick={() => check("from_categories")}/>
-        from Categories</label>
+    <div className="border_radio">
+      <label htmlFor="search" className="border_search">
+        <label className="radio_buttons">
+          <input className="radio" type="radio" id="from_categories" name="from_categories" onClick={() => check("from_categories")}/>
+          <span className="on_radio"></span> 
+        </label>
+        From categories
+        </label>
         <div className="none" id="btn_container">
           {(isLoading && <h1>Loading...</h1>) ||  categoriesArr.map((item, index) => <ButtonCategories key={index} item={item} setCategories={setCategories}/>)}
         </div>

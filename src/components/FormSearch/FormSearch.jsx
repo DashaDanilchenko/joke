@@ -1,6 +1,7 @@
 import FromCategories from "./FromCategories"
 import Random from "./Random"
 import Search from "./Search"
+import "./Form.css"
 
 
 

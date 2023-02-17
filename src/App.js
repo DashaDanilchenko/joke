@@ -2,6 +2,7 @@ import { useState } from "react"
 import JokeContainer from './components/JokeContainer';
 import FavoriteJokeContainer from './components/FavoriteJokeContainer';
 import './App.css';
+import './normalize.css'
 
 function App() {
 

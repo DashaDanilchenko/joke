@@ -4,7 +4,7 @@ import styles from '../styles/JokeContainer.module.css'
 import Joke from './Joke'
 import LabelFavorite from "./LabelFavorite"
 
-const JokeContainer = ({addJoke, jokeFavorite, deleteJoke, setFavoriteContainer, favoriteContainer}) => {
+const JokeContainer = ({addJoke, jokeFavorite, deleteJoke, setFavoriteContainer}) => {
 
   const baseUrl = 'https://api.chucknorris.io/jokes/'
 
@@ -40,7 +40,7 @@ const JokeContainer = ({addJoke, jokeFavorite, deleteJoke, setFavoriteContainer,
 
 
   return (
-    <div className={`${styles.container} `}>
+    <div className={styles.container}>
       <div className={styles.container_label}>
         <p>MSI 2020</p> 
         <LabelFavorite setFavoriteContainer={setFavoriteContainer}/>
@@ -48,7 +48,7 @@ const JokeContainer = ({addJoke, jokeFavorite, deleteJoke, setFavoriteContainer,
        <h2>Hey !</h2>
        <p>Let`s try find a joke for you:</p>
        <FormSearch setInput={setInput} setCategories={setCategories} input={input}/>
-       <button type="button" onClick={() => searchJoke()}>Get a joke</button>
+       <button className="get_joke" type="button" onClick={() => searchJoke()}>Get a joke</button>
        <Joke joke = {joke} addJoke = {addJoke} jokeFavorite={jokeFavorite} deleteJoke={deleteJoke}/>
     </div>
   )

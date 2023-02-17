@@ -23,6 +23,7 @@
 }
 
 
+
 @media (min-width:480px) and (max-width:1080px){
 
     .favorite {
@@ -32,10 +33,6 @@
 
     .favorite_text, .none {
         display: none;
-    }
-
-    .block_screen {
-        position: absolute;
     }
   }
   @media(max-width:480px){
@@ -48,9 +45,5 @@
     .favorite_text, .none {
         display: none;
        
-    }
-
-    .block_screen {
-        position: absolute;
     }
   }

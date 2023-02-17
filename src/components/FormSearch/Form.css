@@ -1,0 +1,82 @@
+form {
+    max-width: 440px;
+}
+
+.border_radio {
+    margin-bottom: 20px;
+}
+
+.border_search {
+    display: flex;
+    align-items: center;
+}
+
+.radio_buttons {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.radio {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+.on_radio {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border: 2px solid rgb(63, 65, 63);
+    border-radius: 10px;
+}
+.on_radio:before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    top: 2px;
+    left: 2px;
+    background:rgb(63, 65, 63);
+    opacity: 0;
+}
+input:checked + .on_radio:before {
+    opacity: 1;
+}
+
+.button_categories {
+    width: 80px;
+    margin: 10px;
+    padding: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.button_categories:hover {
+    background: rgb(147, 185, 185);
+    border: none;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+.input_text {
+    margin-top: 10px;
+}
+
+.get_joke {
+    border: none;
+    padding: 5px 10px;
+    background: rgb(60, 148, 148);
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
