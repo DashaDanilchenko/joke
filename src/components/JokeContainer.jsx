@@ -4,7 +4,7 @@ import styles from '../styles/JokeContainer.module.css'
 import Joke from './Joke'
 import LabelFavorite from "./LabelFavorite"
 
-const JokeContainer = ({addJoke, jokeFavorite, deleteJoke, setFavoriteContainer}) => {
+const JokeContainer = ({addJoke, jokeFavorite, deleteJoke, setOnStyles}) => {
 
   const baseUrl = 'https://api.chucknorris.io/jokes/'
 
@@ -31,6 +31,9 @@ const JokeContainer = ({addJoke, jokeFavorite, deleteJoke, setFavoriteContainer}
       if (!input) {
         return alert('Select a word!')
       }
+      if (input.length < 3) {
+        return alert('Enter a word that is three letters long!')
+      }
         url = `${baseUrl}/search?query=${input}`
     }
     getJoke(url)
@@ -43,7 +46,7 @@ const JokeContainer = ({addJoke, jokeFavorite, deleteJoke, setFavoriteContainer}
     <div className={styles.container}>
       <div className={styles.container_label}>
         <p>MSI 2020</p> 
-        <LabelFavorite setFavoriteContainer={setFavoriteContainer}/>
+        <LabelFavorite setOnStyles={setOnStyles}/>
       </div>
        <h2>Hey !</h2>
        <p>Let`s try find a joke for you:</p>

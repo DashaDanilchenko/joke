@@ -2,26 +2,26 @@
 import { BiX, BiMenu } from 'react-icons/bi'
 import styles from '../styles/LabelFavorite.module.css'
 
-  const LabelFavorite = ({setFavoriteContainer, favoriteContainer}) => {
+  const LabelFavorite = ({setOnStyles, onStyles}) => {
 
   function closeBtn() {
-    setFavoriteContainer(false)
+    setOnStyles(false)
   }
 
   function menuBtn() {
-    setFavoriteContainer(true)
+    setOnStyles(true)
   }
 
   return (
     <div className={styles.favorite_btn}>
       <div
-        className={`${styles.btn} ${favoriteContainer ? '' : styles.none}`}
+        className={`${styles.btn} ${onStyles ? '' : styles.none}`}
         onClick={() => closeBtn()}
       >
         <BiX />
       </div>
       <div
-        className={`${styles.btn} ${favoriteContainer ? styles.none : ''}`}
+        className={`${styles.btn} ${onStyles ? styles.none : ''}`}
         onClick={() => menuBtn()}
       >
         <BiMenu />
